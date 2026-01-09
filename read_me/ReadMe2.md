@@ -22,3 +22,9 @@ git commit -a
 pre-commit run end-of-file-fixer --all-files
 pre-commit run --all-files
 ```
+
+``` js
+git remote add origin https://github.com/Qfish007/002-simple-redis.git
+git branch -M main
+git push -u origin main
+```
