@@ -26,5 +26,5 @@ pre-commit run --all-files
 ``` js
 git remote add origin https://github.com/Qfish007/002-simple-redis.git
 git branch -M main
-git push -u origin main
+git push -u origin mains
 ```
