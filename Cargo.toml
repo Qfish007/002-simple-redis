@@ -9,3 +9,4 @@ authors = ["Qfish007 <506175003@qq.com>"]
 anyhow = "1.0.100"
 bytes = "1.6.0"
 enum_dispatch = "0.3.13"
+thiserror = "1.0.58"

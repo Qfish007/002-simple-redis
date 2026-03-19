@@ -17,16 +17,8 @@
  */
 
 use crate::{
-    BulkString,
-    RespArray,
-    RespEncode,
-    RespMap,
-    RespNull,
-    RespNullArray,
-    RespNullBulkString,
-    RespSet,
-    SimpleError,
-    SimpleString,
+    BulkString, RespArray, RespEncode, RespMap, RespNull, RespNullArray, RespNullBulkString,
+    RespSet, SimpleError, SimpleString,
 };
 
 const BUF_CAP: usize = 4096;
@@ -191,14 +183,16 @@ mod tests {
 
     #[test]
     fn test_array_encode() {
-        let frame: RespFrame = RespArray::new(
-            vec![
-                BulkString::new("set".to_string()).into(),
-                BulkString::new("hello".to_string()).into(),
-                BulkString::new("world".to_string()).into()
-            ]
-        ).into();
-        assert_eq!(&frame.encode(), b"*3\r\n$3\r\nset\r\n$5\r\nhello\r\n$5\r\nworld\r\n");
+        let frame: RespFrame = RespArray::new(vec![
+            BulkString::new("set".to_string()).into(),
+            BulkString::new("hello".to_string()).into(),
+            BulkString::new("world".to_string()).into(),
+        ])
+        .into();
+        assert_eq!(
+            &frame.encode(),
+            b"*3\r\n$3\r\nset\r\n$5\r\nhello\r\n$5\r\nworld\r\n"
+        );
     }
 
     #[test]
@@ -240,11 +234,17 @@ mod tests {
     #[test]
     fn test_map_encode() {
         let mut map = RespMap::new();
-        map.insert("hello".to_string(), BulkString::new("world".to_string()).into());
+        map.insert(
+            "hello".to_string(),
+            BulkString::new("world".to_string()).into(),
+        );
         map.insert("foo".to_string(), (-123456.789).into());
 
         let frame: RespFrame = map.into();
-        assert_eq!(&frame.encode(), b"%2\r\n+foo\r\n,-123456.789\r\n+hello\r\n$5\r\nworld\r\n");
+        assert_eq!(
+            &frame.encode(),
+            b"%2\r\n+foo\r\n,-123456.789\r\n+hello\r\n$5\r\nworld\r\n"
+        );
     }
 
     #[test]
@@ -252,12 +252,16 @@ mod tests {
         let frame: RespFrame = RespSet::new([
             RespArray::new([(1234).into(), true.into()]).into(),
             BulkString::new("world".to_string()).into(),
-        ]).into();
-        assert_eq!(frame.encode(), b"~2\r\n*2\r\n:+1234\r\n#t\r\n$5\r\nworld\r\n");
+        ])
+        .into();
+        assert_eq!(
+            frame.encode(),
+            b"~2\r\n*2\r\n:+1234\r\n#t\r\n$5\r\nworld\r\n"
+        );
     }
 }
 
-/* 
+/*
  cargo install cargo-nextest
  cargo nextest run
 */
